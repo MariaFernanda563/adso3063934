@@ -52,7 +52,7 @@ main {
             padding-inline: 1rem;
             align-items: center;
             &.checked {
-                background-color:  rgb(96, 218, 149) !important;
+                background-color:  rgb(126, 102, 143) !important;
                 p {
                     text-decoration: line-through;
                 }
@@ -103,6 +103,14 @@ main {
             cursor: pointer;
             display: flex;
 
+        }
+        button#reset{
+            background-color:  crimson;
+            border-radius: 0.9rem 0 0.8rem 0;
+            width: 30px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            display: flex;
         }
     }
 }
