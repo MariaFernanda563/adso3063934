@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 - Install</title>
+    <link rel="shortcut icon" href="favicon.ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/master.css">
+    <style>
+        .install{
+            background-color: #34B3B0;
+            border-radius: 0.2rem;
+            color: black;
+            margin: 2rem auto;
+            padding: 0.6rem;
+        }
+    </style>
+</head>
+
+<body class="jquery">
+    <nav class="nav">
+        <a href="../index.html"></a>
+    </nav>
+    <main>
+        <header class="header">
+            <h2>01 - Install</h2>
+            <p>Set up and include jQuery in your project.</p>
+        </header>
+        <section class="section">
+            <p class="install"></p>
+        </section>
+    </main>
+    <script src="js/jquery-3.7.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.install').text('✔️ jQuery Installed Success')
+            });
+        </script>
+</body>
+</html>

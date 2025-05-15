@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 - Ready</title>
+    <link rel="shortcut icon" href="favicon.ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/master.css">
+</head>
+
+<body class="jquery">
+    <nav class="nav">
+        <a href="../index.html"></a>
+    </nav>
+    <main>
+        <header class="header">
+            <h2>02 - Ready</h2>
+            <p>Execute code when the DOM is fully loaded.</p>
+        </header>
+        <section class="section">
+
+        </section>
+    </main>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+        //large way
+        $(document).ready(function(){
+            $('.ready').text('DOM loaded 💛')
+        })
+        //short hand
+        $(function() {
+            alert('DOM loaded 💛')
+        })
+        $(()=>{
+            console.log('DOM loaded 💛')
+        })
+        </script>
+</body>
+
+</html>
