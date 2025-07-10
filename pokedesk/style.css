@@ -47,7 +47,7 @@ nav {
 
 /* MAIN & HEADER */
 main {
-   margin: 2rem auto;
+  margin: 2rem auto;
   padding: 1rem;
 }
 
@@ -169,8 +169,8 @@ header {
 /* POKEMON LIST */
 .pokemons {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr);
   gap: 1.2rem;
   justify-items: center;
   align-items: stretch;
