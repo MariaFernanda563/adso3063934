@@ -7,20 +7,163 @@
     <title>12 - Challenge memory game</title>
     <link rel="shortcut icon" href="favicon.ico.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/master.css">
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            overflow: hidden;
+        }
+
+        #wrapper {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        #game {
+            height: 100vh;
+            max-height: 700px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #stats {
+            color: white;
+            position: absolute;
+            padding: 1rem;
+            text-align: center;
+            width: calc(100% - 2rem);
+            font-size: 3rem;
+        }
+
+        .card {
+            width: 100px;
+            height: 140px;
+            margin: 1rem;
+            position: relative;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .card.active {
+            transform: rotateY(180deg);
+        }
+
+        .card div {
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            backface-visibility: hidden;
+            pointer-events: none;
+        }
+
+        .card .face {
+            background: #05d1fe;
+            transform: rotateY(180deg);
+            color: black;
+            font-size: 6rem;
+        }
+
+        .card .back {
+            border: 3px solid #05d1fe;
+            background: url(imagen/back.png) center / contain no-repeat;
+        }
+    </style>
 </head>
 
 <body class="jquery">
-    <nav class="nav">
-        <a href="../index.html"></a>
-    </nav>
-    <main>
-        <header class="header">
-            <h2>12 - Challenge memory game</h2>
-            <p>Build a memory game using jQuery.</p>
-        </header>
-        <section class="section">
+    <div id="stats">0 intentos</div>
+    <div id="wrapper">
+        <div id="game"></div>
+    </div>
+    <script>
+        const totalCards = 12;
+        const availableCards = ['A', 'K', 'Q', 'J'];
+        let cards = [];
+        let selectedCards = [];
+        let valuesUsed = [];
+        let currentMove = 0;
+        let currentAttempts = 0;
 
-        </section>
+        let cardTemplate = '<div class="card"><div class="back"></div><div class="face"></div></div>';
+
+        function activate(e) {
+            if (currentMove < 2) {
+
+                if ((!selectedCards[0] || selectedCards[0] !== e.target) && !e.target.classList.contains('active')) {
+                    e.target.classList.add('active');
+                    selectedCards.push(e.target);
+
+                    if (++currentMove == 2) {
+
+                        currentAttempts++;
+                        document.querySelector('#stats').innerHTML = currentAttempts + ' intentos';
+
+                        if (selectedCards[0].querySelectorAll('.face')[0].innerHTML == selectedCards[1].querySelectorAll('.face')[0].innerHTML) {
+                            selectedCards = [];
+                            currentMove = 0;
+                        }
+                        else {
+                            setTimeout(() => {
+                                selectedCards[0].classList.remove('active');
+                                selectedCards[1].classList.remove('active');
+                                selectedCards = [];
+                                currentMove = 0;
+                            }, 600);
+                        }
+                    }
+                }
+            }
+        }
+
+        function randomValue() {
+            let rnd = Math.floor(Math.random() * totalCards * 0.5);
+            let values = valuesUsed.filter(value => value === rnd);
+            if (values.length < 2) {
+                valuesUsed.push(rnd);
+            }
+            else {
+                randomValue();
+            }
+        }
+
+        function getFaceValue(value) {
+            let rtn = value;
+            if (value < availableCards.length) {
+                rtn = availableCards[value];
+            }
+            return rtn;
+        }
+
+        for (let i = 0; i < totalCards; i++) {
+            let div = document.createElement('div');
+            div.innerHTML = cardTemplate;
+            cards.push(div);
+            document.querySelector('#game').append(cards[i]);
+            randomValue();
+            cards[i].querySelectorAll('.face')[0].innerHTML = getFaceValue(valuesUsed[i]);
+            cards[i].querySelectorAll('.card')[0].addEventListener('click', activate);
+        }
+    </script>
+    <nav class="nav">
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path
+                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
+        </a>
+    </nav>
+
+
     </main>
 </body>
 
