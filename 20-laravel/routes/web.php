@@ -1,6 +1,23 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     //return "This is route: 🍎";
@@ -51,4 +68,10 @@ Route::get('challenge', function () {
 Route::get('view/pets', function () {
     $pets = App\Models\Pet::all();
     return view('view-pets')->with('pets', $pets);
+});
+
+Route::get('view/pet/{id}', function () {
+    $pet = App\Models\Pet::find(request()->id);
+    // dd($pet->toArray());
+    return view('view-pet')->with('pet', $pet);
 });
