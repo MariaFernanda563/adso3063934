@@ -65,13 +65,13 @@
                 <label class="label">Email</label>
                 <input type="text" class="input bg-[#0009]" name="email" placeholder="Email" value="{{ old('email') }}" />
                 @error('email')
-                    <small class="text-error text-sm mt-1">{{ $message }}</small>
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
                 @enderror
 
                 <label class="label">Password</label>
                 <input type="password" class="input bg-[#0009]" name="password" placeholder="Password" />
                 @error('password')
-                    <small class="text-error text-sm mt-1">{{ $message }}</small>
+                    <small class="badge badge-error w-full -mt-1">{{ $message }}</small>
                 @enderror
 
                 <button class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-4">Login</button>
@@ -80,6 +80,11 @@
                     Don’t have an account?
                     <a href="{{ route('register') }}" class="link link-default">
                         Sign up
+                    </a>
+                </p>
+                <p class="text-sm text-center mt-2">
+                    <a class="link link-default" href="{{ route('password.request') }}">
+                        Forgot your password?
                     </a>
                 </p>
             </form>
