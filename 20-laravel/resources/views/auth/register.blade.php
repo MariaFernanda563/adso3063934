@@ -145,7 +145,7 @@
                     </p>
                     <p class="text-sm text-center mt-2">
                         <a class="link link-default" href="{{ route('login') }}">
-                            Already registered??
+                            Already registered?
                         </a>
                     </p>
                 </div>

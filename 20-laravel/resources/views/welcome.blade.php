@@ -6,7 +6,13 @@
     <section class="bg-[#0009] rounded-lg w-96 p-8 flex flex-col gap-4 items-center justify-center">
         <img src=" {{ asset('images/logo.png') }}" width="260px" alt="logo">
         <p class="text-white">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Un hogar lleno de amor, calor y cuidado. Muchos de ellos han sido rescatados del abandono o de situaciones difíciles, pero todavía conservan algo muy especial: el deseo de amar y ser amados.
+            Adoptar no solo cambia la vida de un animal… también transforma la tuya. Descubrirás la lealtad más pura, una compañía incondicional y la alegría de saber que diste una nueva oportunidad a quien más la necesitaba.
+
+            🌼 Cuando adoptas, no salvas solo una vida, llenas tu hogar de amor, alegría y gratitud.
+            💛 Cada adopción es una historia de esperanza.
+
+            Anímate a dar el paso. El amor no se compra… se adopta.
         </p>
         <div class="flex gap-2 mt-8 text-white">
         @guest()
