@@ -8,14 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 @php
-if(Auth::user()->role == 'Administrator')
+if(Auth::user()->role == 'Administrator'){
 $image = "images/dashboard.jpg";
-else
+}
+else{
 $image = "images/fondovisitante.png";
+}
 @endphp
 
-
-<body class="min-h-[100dvh] bg-[url({{ asset("images/dashboard.jpg") }})] bg-center bg-cover bg-fixed w-full flex flex-col gap-4 items-center justify-center p-8 pt-20">
+<body class="min-h-[100dvh] bg-[url({{ asset($image) }})] bg-center bg-cover bg-fixed w-full flex flex-col gap-4 items-center justify-center p-8 pt-20">
     @include('layouts.navbar')
     @yield('content')
     @yield('js')
