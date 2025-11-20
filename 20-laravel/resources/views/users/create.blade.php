@@ -3,7 +3,7 @@
 @section('title', 'Add Users: Larapets 🙀')
 
 @section('content')
-    <h1 class="text-4xl text-black flex gap-2 items-center justify-center pb-4 border-b-2 border-neutra-50 mb-10">
+    <h1 class="text-4xl text-white flex gap-2 items-center justify-center pb-4 border-b-2 border-neutra-50 mb-10">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-12" fill="currentColor" viewBox="0 0 256 256">
             <path
                 d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V136H88a8,8,0,0,1,0-16h32V88a8,8,0,0,1,16,0v32h32A8,8,0,0,1,176,128Z">
@@ -46,4 +46,111 @@
             </li>
         </ul>
     </div>
+    <div class="card text-black md:w-[720px] w-[320px]">
+        <form method="POST" action="{{ url('users') }}" class="flex flex-col md:flex-row gap-4 mt-4"
+            enctype="multipart/form-data">
+            @csrf
+            <div class="w-full md:w-[320px]">
+                <div
+                    class="avatar flex flex-col gap-2 items-center justify-center cursor-pointer hover:scale-110 transition ease-in">
+                    <div id="upload" class="mask mask-squircle w-48">
+                        <img id="preview" src="{{ asset('images/foto.png') }}" />
+                    </div>
+                    <small class="text-white pb-0 border-white border-b flex gap-1 items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256">
+                            <path
+                                d="M168,136a8,8,0,0,1-8,8H136v24a8,8,0,0,1-16,0V144H96a8,8,0,0,1,0-16h24V104a8,8,0,0,1,16,0v24h24A8,8,0,0,1,168,136Zm64-56V192a24,24,0,0,1-24,24H48a24,24,0,0,1-24-24V80A24,24,0,0,1,48,56H75.72L87,39.12A16,16,0,0,1,100.28,32h55.44A16,16,0,0,1,169,39.12L180.28,56H208A24,24,0,0,1,232,80Zm-16,0a8,8,0,0,0-8-8H176a8,8,0,0,1-6.66-3.56L155.72,48H100.28L86.66,68.44A8,8,0,0,1,80,72H48a8,8,0,0,0-8,8V192a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8Z">
+                            </path>
+                        </svg>
+                        Upload Photo
+                    </small>
+                    @error('photo')
+                        <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                    @enderror
+                </div>
+                <input type="file" id="photo" name="photo" class="hidden" accept="image/*">
+            </div>
+            <div class="w-full md:w-[320px]">
+                {{-- Document --}}
+                <label class="label text-white">Document</label>
+                <input type="number" class="input bg-[#fff]" name="document" placeholder="123456789"
+                    value="{{ old('document') }}" />
+                @error('document')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+
+                {{-- Fullname --}}
+                <label class="label text-white">Full Name</label>
+                <input type="text" class="input bg-[#fff]" name="fullname" placeholder="Jeremias Springfield"
+                    value="{{ old('fullname') }}" />
+                @error('fullname')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+
+                {{-- Gender --}}
+                <label class="label text-white">Gender</label>
+                <select name="gender" class="select bg-[#fff] outline-0">
+                    <option value="">Select...</option>
+                    <option value="Female" @if (old('gender') == 'Female') selected @endif>Female</option>
+                    <option value="Male" @if (old('gender') == 'Male') selected @endif>Male</option>
+                </select>
+                @error('gender')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+
+                {{-- Birthdate --}}
+                <label class="label text-white">Birthdate</label>
+                <input type="date" class="input bg-[#fff]" name="birthdate" placeholder="1983-06-16"
+                    value="{{ old('birthday') }}" />
+                @error('birthdate')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="w-full md:w-[320px]">
+                {{-- phone --}}
+                <label class="label text-white">Phone</label>
+                <input type="number" class="input bg-[#fff]" name="phone" placeholder="3204456321"
+                    value="{{ old('phone') }}" />
+                @error('phone')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+
+                <label class="label text-white">Email</label>
+                <input type="text" class="input bg-[#fff]" name="email" placeholder="Email" value="{{ old('email') }}" />
+                @error('email')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+
+                <label class="label text-white">Password</label>
+                <input type="password" class="input bg-[#fff]" name="password" placeholder="Password" />
+                @error('password')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+
+                <label class="label  text-white">Password Confirmation</label>
+                <input type="password" class="input bg-[#fff]" name="password_confirmation"
+                    placeholder="Password Confirmation" />
+                @error('password_confirmation')
+                    <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
+                @enderror
+
+                <button class="btn btn-outline btn-success hover:text-white mt-4 w-full">Register</button>
+            </div>
+        </form>
+    </div>
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#upload').click(function (e) {
+                e.preventDefault();
+                $('#photo').click();
+            })
+            $('#photo').change(function (e) {
+                $('#preview').attr('src', window.URL.createObjectURL($(this).prop('files')[0]))
+            })
+        })
+    </script>
+
 @endsection
