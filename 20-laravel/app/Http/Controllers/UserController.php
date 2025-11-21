@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         //$users = User::all();
-        $users = User::orderBy('id','desc')->paginate(9);
+        $users = User::orderBy('id', 'desc')->paginate(9);
         //dd($users->toArray());
         return view('users.index')->with('users', $users);
     }
@@ -32,23 +32,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validation = $request->validate([
-            'document'  => ['required', 'numeric', 'unique:' . User::class],
-            'fullname'  => ['required', 'string'],
-            'gender'    => ['required'],
+            'document' => ['required', 'numeric', 'unique:' . User::class],
+            'fullname' => ['required', 'string'],
+            'gender' => ['required'],
             'birthdate' => ['required', 'date'],
-            'photo'     => ['required', 'image'],
-            'phone'     => ['required'],
-            'email'     => ['required', 'lowercase', 'email', 'unique:' . User::class],
-            'password'  => ['required', 'confirmed'],
+            'photo' => ['required', 'image'],
+            'phone' => ['required'],
+            'email' => ['required', 'lowercase', 'email', 'unique:' . User::class],
+            'password' => ['required', 'confirmed'],
         ]);
-            if($request->hasFile('photo')) {
-                $photo = time().'.'.$request->photo->extension();
-                $request->photo->move(public_path('images'), $photo);
-            }
-        
+        if ($request->hasFile('photo')) {
+            $photo = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('images'), $photo);
+        }
+
         $user = new User;
         $user->document  = $request->document;
-        $user->fullname  = $request->fullname;  
+        $user->fullname  = $request->fullname;
         $user->gender    = $request->gender;
         $user->birthdate = $request->birthdate;
         $user->photo     = $photo;
@@ -56,8 +56,8 @@ class UserController extends Controller
         $user->email     = $request->email;
         $user->password  = bcrypt($request->password);
 
-        if($user->save()) {
-            return redirect('users')->with('message', 'The user: ' .$user->fullname. ' was successfully added!');
+        if ($user->save()) {
+            return redirect('users')->with('message', 'The user: ' . $user->fullname . ' was successfully added!');
         }
     }
 
@@ -74,7 +74,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit')->with('user', $user);
     }
 
     /**
@@ -82,15 +82,51 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validation = $request->validate([
+            'document'  => ['required', 'numeric', 'unique:' . User::class . ',document,' . $user->id],
+            'fullname'  => ['required', 'string'],
+            'gender'    => ['required'],
+            'birthdate' => ['required', 'date'],
+            'phone'     => ['required'],
+            'email'     => ['required', 'lowercase', 'email', 'unique:' . User::class . ',email,' . $user->id],
+        ]);
+
+        if ($validation) {
+            // dd($request->all());
+            if ($request->hasFile('photo')) {
+                $photo = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('images'), $photo);
+                if ($request->originphoto != 'null.webp') {
+                    unlink(public_path('images/') . $request->originphoto);
+                }
+            } else {
+                $photo = $request->originphoto;
+            }
+        }
+        $user->document  = $request->document;
+        $user->fullname  = $request->fullname;
+        $user->gender    = $request->gender;
+        $user->birthdate = $request->birthdate;
+        $user->photo     = $photo;
+        $user->phone     = $request->phone;
+        $user->email     = $request->email;
+        if ($user->save()) {
+            return redirect('users')->with('message', 'The user: ' . $user->fullname . ' was successfully edited!');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->photo != 'null.webp') {
+            unlink(public_path('images/') . $user->photo);
+        }
+        if ($user->delete()) {
+            return redirect('users')->with('message', 'The user: ' . $user->fullname . ' was successfully deleted!');
+        }
     }
 
 }

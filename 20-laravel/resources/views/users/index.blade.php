@@ -72,15 +72,6 @@
         <input type="search" placeholder="Search..." name="qsearch" />
     </label>
 
-    @if (session('message'))
-        <div role="alert" class="alert alert-success">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>{{ session('message') }}</span>
-        </div>
-    @endif
 
     {{-- Table --}}
     <div class="overflow-x-auto rounded-box border text-white bg-[#0009]">
@@ -141,7 +132,8 @@
                                     </path>
                                 </svg>
                             </a>
-                            <a class="btn btn-outline btn-error btn-xs" href="javascript:;">
+                            <a class="btn btn-outline btn-error btn-xs btn-delete" href="javascript:;"
+                                data-fullname="{{ $user->fullname }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor"
                                     viewBox="0 0 256 256">
                                     <path
@@ -149,6 +141,10 @@
                                     </path>
                                 </svg>
                             </a>
+                            <form class="hidden" method="POST" action="{{ url('users/' . $user->id) }}">
+                                @csrf
+                                @method('delete')
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -158,33 +154,66 @@
             </tbody>
         </table>
     </div>
-    
-   <button class="btn" onclick="modal_message.showModal()">open modal</button>
+
     <dialog id="modal_message" class="modal">
         <div class="modal-box bg-black text-white">
-            <h3 class="text-lg font-bold">Congratulations!</h3>
+            <h3 class="text-lg font-bold">
+                Congratulations!
+            </h3>
             <div role="alert" class="alert alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>{{ session('success') }}</span>
+                <span>{{ session('message') }}</span>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
             <button>close</button>
         </form>
     </dialog>
+    <dialog id="modal_delete" class="modal">
+        <div class="modal-box bg-black text-white">
+            <h3 class="text-lg font-bold">
+                Are you sure?
+            </h3>
+            <div role="alert" class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                        d="M216,48H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM192,208H64V64H192ZM80,24a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,24Z">
+                    </path>
+                </svg>
+                <span>You want to delete: <strong class="fullname"></strong></span>
+            </div>
+            <div class="flex gap-2 mt-4">
+                <button class="btn btn-default btn-outline btn-sm btn-confirm">Confirm</button>
+                <form method="dialog">
+                    <button class="btn btn-default btn-outline btn-sm">Cancel</button>
+                </form>
+            </div>
+    </dialog>
 @endsection
 
 @section('js')
-<script>
-    $(document).ready(function(){
-        const modal_message = document.getElementById('modal_message');
-        @if (session('success'))
-            modal_message.showModal();
-        @endif
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            //Modal
+            const modal_message = document.getElementById('modal_message');
+            @if (session('message'))
+                modal_message.showModal();
+            @endif
+            //Delete
+            $('table').on('click', '.btn-delete', function () {
+                $fullname = $(this).data('fullname')
+                $('.fullname').text($fullname)
+                $frm = $(this).next()
+                modal_delete.showModal()
+            })
+            $('.btn-confirm').click(function (e){
+                e.preventDefault();
+                $frm.submit();
+            })
+        })
+    </script>
 @endsection
