@@ -8,11 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 @php
-if(Auth::user()->role == 'Administrator'){
+if(Auth::user()->role == 'Administrador'){
 $image = "images/dashboard.jpg";
 }
 else{
-$image = "images/fondovisitante.png";
+$image = "images/fondo2.jpg";
 }
 @endphp
 

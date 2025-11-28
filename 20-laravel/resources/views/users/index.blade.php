@@ -48,17 +48,20 @@
                 Export
             </span>
         </a>
-        <a class="btn btn-outline bg-[#0006] text-white hover:bg-[#0009] hover:text-white join-item"
-            href="{{ url('users/create') }}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                    d="M200,24H72A16,16,0,0,0,56,40V64H40A16,16,0,0,0,24,80v96a16,16,0,0,0,16,16H56v24a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V40A16,16,0,0,0,200,24Zm-40,80h40v48H160Zm40-16H160V80a16,16,0,0,0-16-16V40h56ZM72,40h56V64H72ZM40,80H144v79.83c0,.06,0,.11,0,.17s0,.11,0,.17V176H40ZM72,192h56v24H72Zm72,24V192a16,16,0,0,0,16-16v-8h40v48ZM65.85,146.88,81.59,128,65.85,109.12a8,8,0,0,1,12.3-10.24L92,115.5l13.85-16.62a8,8,0,1,1,12.3,10.24L102.41,128l15.74,18.88a8,8,0,0,1-12.3,10.24L92,140.5,78.15,157.12a8,8,0,0,1-12.3-10.24Z">
-                </path>
-            </svg>
-            <span class="hidden md:inline">
-                Import
-            </span>
-        </a>
+        <form class="join-item" action="{{ url('import/users') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="file" id="file" class="hidden"
+                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            <button type="button"
+                class="btn btn-outline bg-[#0006] text-white hover:bg-[#0009] hover:text-white join-itemt btn-import">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                        d="M200,24H72A16,16,0,0,0,56,40V64H40A16,16,0,0,0,24,80v96a16,16,0,0,0,16,16H56v24a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V40A16,16,0,0,0,200,24Zm-40,80h40v48H160Zm40-16H160V80a16,16,0,0,0-16-16V40h56ZM72,40h56V64H72ZM40,80H144v79.83c0,.06,0,.11,0,.17s0,.11,0,.17V176H40ZM72,192h56v24H72Zm72,24V192a16,16,0,0,0,16-16v-8h40v48ZM65.85,146.88,81.59,128,65.85,109.12a8,8,0,0,1,12.3-10.24L92,115.5l13.85-16.62a8,8,0,1,1,12.3,10.24L102.41,128l15.74,18.88a8,8,0,0,1-12.3,10.24L92,140.5,78.15,157.12a8,8,0,0,1-12.3-10.24Z">
+                    </path>
+                </svg>
+                <span class="hidden md:inline">Import</span>
+            </button>
+        </form>
     </div>
 
     {{-- Search --}}
@@ -69,7 +72,7 @@
                 <path d="m21 21-4.3-4.3"></path>
             </g>
         </svg>
-        <input type="search" placeholder="Search..." name="qsearch" />
+        <input type="search" placeholder="Search..." name="qsearch" id="qsearch" />
     </label>
 
 
@@ -88,7 +91,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="datalist">
                 @foreach ($users as $user)
                     <tr @if ($user->id % 2 == 0) class="bg-[#0006]" @endif>
                         <th class="hidden md:table-cell">{{ $user->id }}</th>
@@ -200,19 +203,65 @@
         $(document).ready(function () {
             //Modal
             const modal_message = document.getElementById('modal_message');
-            @if (session('message'))
+            @if (session('success'))
                 modal_message.showModal();
             @endif
             //Delete
             $('table').on('click', '.btn-delete', function () {
-                $fullname = $(this).data('fullname')
+                $fullname = $(this).attr('data-fullname')
                 $('.fullname').text($fullname)
                 $frm = $(this).next()
                 modal_delete.showModal()
             })
-            $('.btn-confirm').click(function (e){
-                e.preventDefault();
+            $('.btn-confirm').click(function () {
                 $frm.submit();
+            })
+            // Search--------------
+            function debounce(func, wait) {
+                let timeout
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout)
+                        func(...args)
+                    };
+                    clearTimeout(timeout)
+                    timeout = setTimeout(later, wait)
+                }
+            }
+            const search = debounce(function (query) {
+
+                $token = $('input[name=_token]').val()
+
+                $.post("search/users", { 'q': query, '_token': $token },
+                    function (data) {
+                        $('.datalist').html(data).hide().fadeIn(1000)
+                    }
+                )
+            }, 500)
+            $('body').on('input', '#qsearch', function (event) {
+
+                event.preventDefault()
+                const query = $(this).val()
+
+                $('.datalist').html(`<tr>
+                        <td colspan="7" class="text-center py-18">
+                            <span class="loading loading-infinity loading-xl"></span>
+                        </td>
+                    </tr>`)
+                if (query != '') {
+                    search(query)
+                } else {
+                    setTimeout(() => {
+                        window.location.replace('users')
+                    }, 500)
+                }
+            })
+            //import 
+            $('.btn-import').click(function (e) {
+                $('#file').click()
+            })
+            $('#file').change(function (e) {
+                $(this).parent().submit()
             })
         })
     </script>
