@@ -1,15 +1,20 @@
 @forelse ($pets as $pet)
     <tr @if($pet->id % 2 == 0) class="bg-[#0006]" @endif>
         <th class="hidden md:table-cell">{{ $pet->id }}</th>
+        <td>{{ $pet->name }}</td>
         <td>
             <div class="avatar">
-                <div class="mask mask-squircle w-16">
+                <div class="mask mask-squircle w-24">
                     <img src="{{ asset('images/' . $pet->photo) }}" />
                 </div>
             </div>
         </td>
-        <td class="hidden md:table-cell">{{ $pet->name }}</td>
-        <td>{{ $pet->name }}</td>
+        <td class="hidden md:table-cell">{{ $pet->kind }}</td>
+        <td class="hidden md:table-cell">{{ $pet->weight }} Kg</td>
+        <td>{{ $pet->age }} Years</td>
+        <td class="hidden md:table-cell">{{ $pet->breed }}</td>
+        <td class="hidden md:table-cell">{{ $pet->location }}</td>
+        <td>{{ Str::limit($pet->description, 10) }}</td>
         <td>
             <a class="btn btn-xs" href="{{ url('pets/' . $pet->id) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor" viewBox="0 0 256 256">

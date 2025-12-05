@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>All Users</title>
+    <title>All Pets</title>
 </head>
 <body>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
+                <th>Name Pet</th>
+                <th>Kind</th>
+                <th>Weight</th>
+                <th>Age</th>
+                <th>Breed</th>
+                <th>Location</th>
+                <th>Description</th>
                 <th>Photo</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($pets as $pet)
             <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->fullname }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->phone }}</td>
-                <td>{{ $user->role }}</td>
+                <td>{{ $pet->id }}</td>
+                <td>{{ $pet->name }}</td>
+                <td>{{ $pet->kind }}</td>
+                <td>{{ $pet->weight }}</td>
+                <td>{{ $pet->age ?? 'N/A' }} Years old</td>
+                <td>{{ $pet->breed }}</td>
+                <td>{{ $pet->location }}</td>
+                <td>{{ $pet->description }}</td>
                 <td>
-                    <img src="{{ public_path().'/images/'.$user->photo }}" width="50px">
+                    <img src="{{ public_path().'/images/no-image.png'.$pet->photo }}" width="50px">
                 </td>
             </tr>
             @endforeach

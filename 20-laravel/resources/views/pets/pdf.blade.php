@@ -31,13 +31,13 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Full Name</th>
-                <th>Gender</th>
+                <th>Name Pet</th>
+                <th>Kind</th>
+                <th>Weight</th>
                 <th>Age</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Active</th>
+                <th>Breed</th>
+                <th>Location</th>
+                <th>Description</th>
                 <th>Photo</th>
             </tr>
         </thead>
@@ -47,24 +47,18 @@
                 <td>{{ $pet->id }}</td>
                 <td>{{ $pet->name }}</td>
                 <td>{{ $pet->kind }}</td>
-                <td>{{ Carbon\Carbon::parse($pet->age)->age }} Years old</td>
-                <td>{{ $pet->email }}</td>
-                <td>{{ $pet->phone }}</td>
-                <td>{{ $pet->role }}</td>
-                <td>
-                    @if ($pet->active == 1)
-                        Active
-                    @else
-                        Inactive
-                    @endif
-                </td>
+                <td>{{ $pet->weight }}</td>
+                <td>{{ $pet->age ?? 'N/A' }} Years old</td>
+                <td>{{ $pet->breed }}</td>
+                <td>{{ $pet->location }}</td>
+                <td>{{ $pet->description }}</td>
 
                 <td>
                     @php
                         $extension = substr($pet->photo, -4);
                     @endphp
                     @if ($extension != 'webp' && $extension != '.svg')
-                        <img src="{{ public_path().'/images/'.$pet->photo }}" width="96px">
+                        <img src="{{ public_path().'/images/no-image.png'.$pet->photo }}" width="96px">
                     @else
                         Webp|SVG
                     @endif

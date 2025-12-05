@@ -78,14 +78,14 @@ Route::middleware('auth')->group(function () {
 });
 
 //Search
-Route::post('search/users', [UserController::class, 'search']);
+Route::post('search/pets', [PetController::class, 'search']);
 // Route::post('search/pets', [PetController::class, 'search']);}
 
 //Export
-Route::get('export/users/pdf', [UserController::class, 'pdf']);
-Route::get('export/users/excel', [UserController::class, 'excel']);
+Route::get('export/pets/pdf', [PetController::class, 'pdf']);
+Route::get('export/pets/excel', [PetController::class, 'excel']);
 
 //Import
-Route::post('import/users', [UserController::class, 'import']);
+Route::post('import/pets', [PetController::class, 'import']);
 
 require __DIR__.'/auth.php';

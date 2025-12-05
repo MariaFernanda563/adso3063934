@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Pet;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PetsExport;
 
 class PetController extends Controller
 {
@@ -31,7 +34,7 @@ class PetController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'kind' => 'required|string|max:50',
             'weight' => 'nullable|numeric',
             'age' => 'nullable|integer',
@@ -40,10 +43,10 @@ class PetController extends Controller
             'description' => 'nullable|string|max:100',
         ]);
 
-        if ($request->hasFile('image')) {
-            $filename = time() . '-' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('images'), $filename);
-            $validated['image'] = $filename;
+        if ($request->hasFile('photo')) {
+            $filename = time() . '-' . $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('images'), $filename);
+            $validated['photo'] = $filename;
         }
 
         $validated['active'] = $request->has('active') ? 1 : 0;
@@ -82,15 +85,15 @@ class PetController extends Controller
             'age' => 'nullable|integer',
             'location' => 'nullable|string|max:200',
             'description' => 'nullable|string|max:500',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'active' => 'nullable|boolean',
             'status' => 'nullable|string|max:50',
         ]);
 
-        if ($request->hasFile('image')) {
-            $filename = time() . '-' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('images'), $filename);
-            $validated['image'] = $filename;
+        if ($request->hasFile('photo')) {
+            $filename = time() . '-' . $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('images'), $filename);
+            $validated['photo'] = $filename;
         }
 
         $validated['active'] = $request->has('active') ? 1 : 0;
@@ -114,8 +117,38 @@ class PetController extends Controller
      */
     public function search(Request $request)
     {
-        $q = $request->input('qsearch', '');
-        $pets = Pet::names($q)->paginate(10);
+        // Accept both 'q' and 'qsearch' parameters
+        $q = trim($request->input('q') ?? $request->input('qsearch', ''));
+
+        if ($q === '') {
+            $pets = Pet::orderBy('id', 'desc')->paginate(10);
+            return view('pets.search', compact('pets'));
+        }
+
+        // If there's an exact name match (case-insensitive), return only that/those
+        $exact = Pet::whereRaw('LOWER(name) = ?', [strtolower($q)]);
+        if ($exact->exists()) {
+            $pets = $exact->orderBy('id', 'desc')->paginate(10);
+            return view('pets.search', compact('pets'));
+        }
+
+        // Search only by name (starting with query)
+        $pets = Pet::where('name', 'like', "{$q}%")
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
         return view('pets.search', compact('pets'));
+    }
+
+    //export pdf
+    public function pdf(){
+        $pets = Pet::all();
+        $pdf = PDF:: loadView('pets.pdf', compact('pets'));
+        return $pdf->download('allpets.pdf');
+    }
+
+    //Export Excel
+    public function excel(){
+        return Excel::download(new PetsExport, 'allpets.xlsx');
     }
 }
