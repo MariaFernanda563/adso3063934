@@ -33,20 +33,20 @@ class PetController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'kind' => 'required|string|max:50',
-            'weight' => 'nullable|numeric',
-            'age' => 'nullable|integer',
-            'breed' => 'nullable|string|max:100',
-            'location' => 'nullable|string|max:200',
+            'name'      => 'required|string|max:100',
+            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'kind'      => 'required|string|max:50',
+            'weight'    => 'nullable|numeric',
+            'age'       => 'nullable|integer',
+            'breed'     => 'nullable|string|max:100',
+            'location'  => 'nullable|string|max:200',
             'description' => 'nullable|string|max:100',
         ]);
 
-        if ($request->hasFile('photo')) {
-            $filename = time() . '-' . $request->file('photo')->getClientOriginalName();
-            $request->file('photo')->move(public_path('images'), $filename);
-            $validated['photo'] = $filename;
+        if ($request->hasFile('image')) {
+            $filename = time() . '-' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('images'), $filename);
+            $validated['image'] = $filename;
         }
 
         $validated['active'] = $request->has('active') ? 1 : 0;
@@ -85,15 +85,15 @@ class PetController extends Controller
             'age' => 'nullable|integer',
             'location' => 'nullable|string|max:200',
             'description' => 'nullable|string|max:500',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'active' => 'nullable|boolean',
             'status' => 'nullable|string|max:50',
         ]);
 
-        if ($request->hasFile('photo')) {
-            $filename = time() . '-' . $request->file('photo')->getClientOriginalName();
-            $request->file('photo')->move(public_path('images'), $filename);
-            $validated['photo'] = $filename;
+        if ($request->hasFile('image')) {
+            $filename = time() . '-' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('images'), $filename);
+            $validated['image'] = $filename;
         }
 
         $validated['active'] = $request->has('active') ? 1 : 0;

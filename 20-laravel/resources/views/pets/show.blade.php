@@ -52,7 +52,7 @@
         <div
             class="avatar flex flex-col gap-2 items-center justify-center cursor-pointer hover:scale-110 transition ease-in">
             <div class="mask mask-squircle w-60">
-                <img src="{{ asset('images/' . $pet->photo) }}" />
+                <img src="{{ asset('images/' . $pet->image) }}" />
             </div>
         </div>
         {{-- -Data --}}

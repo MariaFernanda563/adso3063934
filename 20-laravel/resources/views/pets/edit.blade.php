@@ -55,7 +55,7 @@
                 <div
                     class="avatar flex flex-col gap-2 items-center justify-center cursor-pointer hover:scale-110 transition ease-in">
                     <div id="upload" class="mask mask-squircle w-48">
-                        <img id="preview" src="{{ asset('images/' . $pet->photo) }}" />
+                        <img id="preview" src="{{ asset('images/' . $pet->image) }}" />
                     </div>
                     <small class="text-white pb-0 border-white border-b flex gap-1 items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256">
@@ -65,12 +65,12 @@
                         </svg>
                         Upload Photo
                     </small>
-                    @error('photo')
+                    @error('image')
                         <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                 </div>
-                <input type="file" id="photo" name="photo" class="hidden" accept="image/*">
-                <input type="hidden" name="originphoto" value="{{ $pet->photo }}">
+                <input type="file" id="image" name="image" class="hidden" accept="image/*">
+                <input type="hidden" name="originimage" value="{{ $pet->image }}">
             </div>
             <div class="w-full md:w-[320px]">
                 {{-- name --}}
@@ -147,9 +147,9 @@
         $(document).ready(function () {
             $('#upload').click(function (e) {
                 e.preventDefault();
-                $('#photo').click();
+                $('#image').click();
             })
-            $('#photo').change(function (e) {
+            $('#image').change(function (e) {
                 $('#preview').attr('src', window.URL.createObjectURL($(this).prop('files')[0]))
             })
         })

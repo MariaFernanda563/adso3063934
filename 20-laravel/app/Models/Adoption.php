@@ -26,5 +26,17 @@ class Adoption extends Model
     public function pet(){
         return $this->belongsTo(Pet::class);
     }
+
+    public function scopenames($query, $q){
+        $q = trim((string) $q);
+        if ($q !== '') {
+            $query->whereHas('user', function($sub) use ($q) {
+                $sub->where('fullname', 'LIKE', "%{$q}%");
+            })->orWhereHas('pet', function($sub) use ($q) {
+                $sub->where('name', 'LIKE', "%{$q}%");
+            });
+        }
+        return $query;
+    }
 }
 

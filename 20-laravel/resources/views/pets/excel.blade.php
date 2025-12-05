@@ -33,7 +33,7 @@
                 <td>{{ $pet->location }}</td>
                 <td>{{ $pet->description }}</td>
                 <td>
-                    <img src="{{ public_path().'/images/no-image.png'.$pet->photo }}" width="50px">
+                    <img src="{{ public_path().'/images/'.$pet->image }}" width="50px">
                 </td>
             </tr>
             @endforeach

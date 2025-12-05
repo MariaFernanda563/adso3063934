@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PetController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdoptionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,7 +30,7 @@ Route::get('show/pet/{id}', function () {
 
 Route::get('challenge', function () {
     $users = \App\Models\User::take(20)->get();
-    
+
     $html = '<table border="1" style="border-collapse: collapse; width: 50%;">
         <tr>
             <th>Id</th>
@@ -38,7 +39,7 @@ Route::get('challenge', function () {
             <th>Edad</th>
             <th>Creación</th>
         </tr>';
-    
+
     foreach ($users as $user) {
         $html .= '<tr>
             <td style="text-align: center;">' . $user->id . '</td>
@@ -48,9 +49,9 @@ Route::get('challenge', function () {
             <td style="padding: 10px;">' . $user->created_at->diffForHumans() . '</td>
         </tr>';
     }
-    
+
     $html .= '</table>';
-    
+
     return $html;
 });
 
@@ -70,22 +71,33 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resources([
-        'users' => UserController::class,
-        'pets' => PetController::class,
- /*       'adoptions' => AdoptionController::class, */
-    ]);
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resources([
+            'users' => UserController::class,
+            'pets' => PetController::class,
+            /*       'adoptions' => AdoptionController::class, */
+        ]);
+
+        //Adoptions
+        Route::get('adoptions', [AdoptionController::class, 'index']);
+        Route::get('adoptions/{id}', [AdoptionController::class, 'show']);
+        Route::post('search/adoptions', [AdoptionController::class, 'search']);
+        Route::get('export/adoptions/pdf', [AdoptionController::class, 'pdf']);
+        Route::get('export/adoptions/excel', [AdoptionController::class, 'excel']);
+
+        //Search
+        Route::post('search/pets', [PetController::class, 'search']);
+        // Route::post('search/pets', [PetController::class, 'search']);}
+
+        //Export
+        Route::get('export/pets/pdf', [PetController::class, 'pdf']);
+        Route::get('export/pets/excel', [PetController::class, 'excel']);
+
+        //Import
+        Route::post('import/pets', [PetController::class, 'import']);
+        
+    });
 });
 
-//Search
-Route::post('search/pets', [PetController::class, 'search']);
-// Route::post('search/pets', [PetController::class, 'search']);}
 
-//Export
-Route::get('export/pets/pdf', [PetController::class, 'pdf']);
-Route::get('export/pets/excel', [PetController::class, 'excel']);
-
-//Import
-Route::post('import/pets', [PetController::class, 'import']);
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

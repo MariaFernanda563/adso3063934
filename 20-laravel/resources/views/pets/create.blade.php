@@ -64,11 +64,11 @@
                         </svg>
                         Upload Photo
                     </small>
-                    @error('photo')
+                    @error('image')
                         <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                 </div>
-                <input type="file" id="photo" name="photo" class="hidden" accept="image/*">
+                <input type="file" id="image" name="image" class="hidden" accept="image/*">
             </div>
             <div class="w-full md:w-[320px]">
 
@@ -95,7 +95,7 @@
 
                 {{-- Weight --}}
                 <label class="label text-white">Weight</label>
-                <input type="number" step="0.01" class="input bg-[#fff]" name="weight" placeholder="Exact Weight"
+                <input type="number" step="0.01" class="input bg-[#fff]" name="weight" placeholder="Exact Weight: 3.6kg"
                     value="{{ old('weight') }}" />
                 @error('weight')
                     <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
@@ -103,7 +103,7 @@
 
                 {{-- Age --}}
                 <label class="label text-white">Age</label>
-                <input type="number" class="input bg-[#fff]" name="age" placeholder="Approximate Age"
+                <input type="number" class="input bg-[#fff]" name="age" placeholder="Approximate Age: 1 year"
                     value="{{ old('age') }}" />
                 @error('age')
                     <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
@@ -113,7 +113,7 @@
             <div class="w-full md:w-[320px]">
                 {{-- Breed --}}
                 <label class="label text-white">Breed</label>
-                <input type="text" class="input bg-[#fff]" name="breed" placeholder="Breed" 
+                <input type="text" class="input bg-[#fff]" name="breed" placeholder="Breed: cocker, pastor aleman, etc" 
                     value="{{ old('breed') }}" />
                 @error('breed')
                     <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
@@ -121,7 +121,7 @@
 
                 {{-- Location --}}
                 <label class="label text-white">Location</label>
-                <input type="text" class="input bg-[#fff]" name="location" placeholder="Location Pet"
+                <input type="text" class="input bg-[#fff]" name="location" placeholder="Location Pet: Manizales, Pereira"
                     value="{{ old('location') }}" />
                 @error('location')
                     <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
@@ -129,7 +129,7 @@
 
                 {{-- Description --}}
                 <label class="label text-white">Description</label>
-                <input type="text" class="input bg-[#fff]" name="description" placeholder="description pet" 
+                <input type="text" class="input bg-[#fff]" name="description" placeholder="Description pet" 
                     value="{{ old('description') }}" />
                 @error('description')
                     <small class="badge badge-error w-full -mt-1 text-xs py-4">{{ $message }}</small>
@@ -145,9 +145,9 @@
         $(document).ready(function () {
             $('#upload').click(function (e) {
                 e.preventDefault();
-                $('#photo').click();
+                $('#image').click();
             })
-            $('#photo').change(function (e) {
+            $('#image').change(function (e) {
                 $('#preview').attr('src', window.URL.createObjectURL($(this).prop('files')[0]))
             })
         })

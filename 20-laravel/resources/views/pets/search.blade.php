@@ -5,7 +5,7 @@
         <td>
             <div class="avatar">
                 <div class="mask mask-squircle w-24">
-                    <img src="{{ asset('images/' . $pet->photo) }}" />
+                    <img src="{{ asset('images/' . $pet->image) }}" />
                 </div>
             </div>
         </td>

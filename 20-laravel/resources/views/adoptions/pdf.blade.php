@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>All Pets</title>
+    <title>All Adoptions</title>
     <style>
         table {
             border: 2px solid #aaa;
@@ -31,34 +31,29 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name Pet</th>
-                <th>Kind</th>
-                <th>Weight</th>
-                <th>Age</th>
-                <th>Breed</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Photo</th>
+                <th>User ID</th>
+                <th>Pet ID</th>
+                <th>Created At</th>
+                <th>Updated At</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($pets as $pet)
+            @foreach ($adoptions as $adoption)
             <tr>
-                <td>{{ $pet->id }}</td>
-                <td>{{ $pet->name }}</td>
-                <td>{{ $pet->kind }}</td>
-                <td>{{ $pet->weight }}</td>
-                <td>{{ $pet->age ?? 'N/A' }} Years old</td>
-                <td>{{ $pet->breed }}</td>
-                <td>{{ $pet->location }}</td>
-                <td>{{ $pet->description }}</td>
+                <td>{{ $adoption->id }}</td>
+                <td>{{ $adoption->user_id }}</td>
+                <td>{{ $adoption->pet_id }}</td>
+                <td>{{ $adoption->created_at }}</td>
+                <td>{{ $adoption->updated_at }}</td>
+                
+                <td>
 
                 <td>
                     @php
-                        $extension = substr($pet->image, -4);
+                        $extension = substr($adoption->image, -4);
                     @endphp
                     @if ($extension != 'webp' && $extension != '.svg')
-                        <img src="{{ public_path().'/images/'.$pet->image }}" width="96px">
+                        <img src="{{ public_path().'/images/'.$adoption->image }}" width="96px">
                     @else
                         Webp|SVG
                     @endif
