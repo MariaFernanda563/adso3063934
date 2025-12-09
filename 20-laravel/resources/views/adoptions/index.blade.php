@@ -38,7 +38,7 @@
             <path d="m21 21-4.3-4.3"></path>
             </g>
         </svg>
-        <input type="search" required placeholder="qsearch" id="qsearch"/>
+        <input type="search" required placeholder="Search..." id="qsearch"/>
     </label>
 
     <div class="datalist flex justify-center items-center flex-col gap-4">
