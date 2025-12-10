@@ -49,7 +49,8 @@ class PetController extends Controller
             $validated['image'] = $filename;
         }
 
-        $validated['active'] = $request->has('active') ? 1 : 0;
+        $validated['active'] = 1;
+        $validated['status'] = 0;
 
         Pet::create($validated);
 

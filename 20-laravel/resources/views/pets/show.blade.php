@@ -62,20 +62,29 @@
                     <span class="text-[#fff9] font-semibold">Name</span> <span> {{ $pet->name }}</span>
                 </li>
                 <li class="list-row">
-                    <span class="text-[#fff9] font-semibold">Kind</span> <span class="text-[#fff9]">
-                        {{ $pet->kind }}</span>
+                    <span class="text-[#fff9] font-semibold">Kind</span> 
+                    <span class="text-[#fff9]">
+                        @if ($pet->kind == 'Dog')
+                            <div class="badge badge-outline badge-warning">Dog</div>
+                        @elseif ($pet->kind == 'Cat')
+                            <div class="badge badge-outline badge-info">Cat</div>
+                        @elseif ($pet->kind == 'Bird')
+                            <div class="badge badge-outline badge-success">Bird</div>
+                        @elseif ($pet->kind == 'Pig')
+                            <div class="badge badge-outline badge-error">Pig</div>
+                        @else
+                            <div class="badge badge-outline">{{ $pet->kind }}</div>
+                        @endif
+                    </span>
                 </li>
                 <li class="list-row">
                     <span class="text-[#fff9] font-semibold">Weight</span> <span class="text-[#fff9]">
-                        {{ $pet->weight }}</span>
+                        {{ $pet->weight }} Kg</span>
                 </li>
                 <li class="list-row">
                     <span class="text-[#fff9] font-semibold">Age</span> <span class="text-[#fff9]">
-                        {{ $pet->age }}</span>
+                        {{ $pet->age }} Years</span>
                 </li>
-            </ul>
-
-            <ul class="list bg-[#0009] mt-4 text-white rounded-box shadow-md">
                 <li class="list-row">
                     <span class="text-[#fff9] font-semibold">Breed</span> <span class="text-[#fff9]">
                         {{ $pet->breed }}</span>
@@ -83,8 +92,39 @@
                 <li class="list-row">
                     <span class="text-[#fff9] font-semibold">Location</span> <span> {{ $pet->location }}</span>
                 </li>
+            </ul>
+
+            <ul class="list bg-[#0009] mt-4 text-white rounded-box shadow-md">
                 <li class="list-row">
                     <span class="text-[#fff9] font-semibold">Desciption</span> <span> {{ $pet->description }}</span>
+                </li>
+                <li class="list-row">
+                    <span class="text-[#fff9] font-semibold">Active</span>
+                    <span>
+                        @if ($pet->active == 1)
+                            <div class="badge badge-outline badge-success">Active</div>
+                        @else
+                            <div class="badge badge-outline badge-error">Inactive</div>
+                        @endif
+                    </span>
+                </li>
+                <li class="list-row">
+                    <span class="text-[#fff9] font-semibold">Status</span>
+                    <span>
+                        @if ($pet->status == 0)
+                            <div class="badge badge-outline badge-success">Available</div>
+                        @else
+                            <div class="badge badge-outline badge-error">Adopted</div>
+                        @endif
+                    </span>
+                </li>
+                <li class="list-row">
+                    <span class="text-[#fff9] font-semibold">Created</span> <span class="text-[#fff9]">
+                        {{ $pet->created_at->format('d/m/Y H:i') }}</span>
+                </li>
+                <li class="list-row">
+                    <span class="text-[#fff9] font-semibold">Updated</span> <span class="text-[#fff9]">
+                        {{ $pet->updated_at->format('d/m/Y H:i') }}</span>
                 </li>
             </ul>
         </div>

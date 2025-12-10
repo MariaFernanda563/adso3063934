@@ -75,8 +75,8 @@
                     <th class="hidden md:table-cell">Weight</th>
                     <th>Age</th>
                     <th class="hidden md:table-cell">Breed</th>
-                    <th class="hidden md:table-cell">Location</th>
-                    <th>Description</th>
+                    <th>Active</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -92,12 +92,36 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="hidden md:table-cell">{{ $pet->kind }}</td>
+                        <td>
+                            @if ($pet->kind == 'Dog')
+                                <div class="badge badge-outline badge-warning">Dog</div>
+                            @elseif ($pet->kind == 'Cat')
+                                <div class="badge badge-outline badge-info">Cat</div>
+                            @elseif ($pet->kind == 'Bird')
+                                <div class="badge badge-outline badge-success">Bird</div>
+                            @elseif ($pet->kind == 'Pig')
+                                <div class="badge badge-outline badge-error">Pig</div>
+                            @else
+                                <div class="badge badge-outline">{{ $pet->kind }}</div>
+                            @endif
+                        </td>
                         <td class="hidden md:table-cell">{{ $pet->weight }} Kg</td>
                         <td>{{ $pet->age }} Years</td>
                         <td class="hidden md:table-cell">{{ $pet->breed }}</td>
-                        <td class="hidden md:table-cell">{{ $pet->location }}</td>
-                        <td>{{ Str::limit($pet->description, 10) }}</td>
+                        <td>
+                            @if ($pet->active == 1)
+                                <div class="badge badge-outline badge-success">Active</div>
+                            @else
+                                <div class="badge badge-outline badge-error">Inactive</div>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($pet->status == 0)
+                                <div class="badge badge-outline badge-success">Available</div>
+                            @else
+                                <div class="badge badge-outline badge-error">Adopted</div>
+                            @endif
+                        </td>
                         <td>
                             <a class="btn btn-outline btn-xs" href="{{ url('pets/' . $pet->id) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor"

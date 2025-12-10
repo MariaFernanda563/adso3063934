@@ -8,11 +8,36 @@
     <h1 class="text-4xl text-black flex gap-2 items-center justify-center pb-4 border-b-2 border-neutra-50 mb-10">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-10" fill="currentColor" viewBox="0 0 256 256">
             <path
-                d="M212,80a28,28,0,1,0,28,28A28,28,0,0,0,212,80Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,212,120ZM72,108a28,28,0,1,0-28,28A28,28,0,0,0,72,108ZM44,120a12,12,0,1,1,12-12A12,12,0,0,1,44,120ZM92,88A28,28,0,1,0,64,60,28,28,0,0,0,92,88Zm0-40A12,12,0,1,1,80,60,12,12,0,0,1,92,48Zm72,40a28,28,0,1,0-28-28A28,28,0,0,0,164,88Zm0-40a12,12,0,1,1-12,12A12,12,0,0,1,164,48Zm23.12,100.86a35.3,35.3,0,0,1-16.87-21.14,44,44,0,0,0-84.5,0A35.25,35.25,0,0,1,69,148.82,40,40,0,0,0,88,224a39.48,39.48,0,0,0,15.52-3.13,64.09,64.09,0,0,1,48.87,0,40,40,0,0,0,34.73-72ZM168,208a24,24,0,0,1-9.45-1.93,80.14,80.14,0,0,0-61.19,0,24,24,0,0,1-20.71-43.26,51.22,51.22,0,0,0,24.46-30.67,28,28,0,0,1,53.78,0,51.27,51.27,0,0,0,24.53,30.71A24,24,0,0,1,168,208Z">
+                d="M230.33,141.06a24.34,24.34,0,0,0-18.61-4.77C230.5,117.33,240,98.48,240,80c0-26.47-21.29-48-47.46-48A47.58,47.58,0,0,0,156,48.75,47.58,47.58,0,0,0,119.46,32C93.29,32,72,53.53,72,80c0,11,3.24,21.69,10.06,33a31.87,31.87,0,0,0-14.75,8.4L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM119.46,48A31.15,31.15,0,0,1,148.6,67a8,8,0,0,0,14.8,0,31.15,31.15,0,0,1,29.14-19C209.59,48,224,62.65,224,80c0,19.51-15.79,41.58-45.66,63.9l-11.09,2.55A28,28,0,0,0,140,112H100.68C92.05,100.36,88,90.12,88,80,88,62.65,102.41,48,119.46,48ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9Z">
             </path>
         </svg>
         Make Adoption
     </h1>
+    {{-- breadcrums --}}
+    <div class="breadcrumbs text-sm flex justify-center text-black">
+        <ul>
+            <li>
+                <a href="{{ url('dashboard') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256">
+                        <path
+                            d="M180,144H160V112h20a36,36,0,1,0-36-36V96H112V76a36,36,0,1,0-36,36H96v32H76a36,36,0,1,0,36,36V160h32v20a36,36,0,1,0,36-36ZM160,76a20,20,0,1,1,20,20H160ZM56,76a20,20,0,0,1,40,0V96H76A20,20,0,0,1,56,76ZM96,180a20,20,0,1,1-20-20H96Zm16-68h32v32H112Zm68,88a20,20,0,0,1-20-20V160h20a20,20,0,0,1,0,40Z">
+                        </path>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('makeadoption') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256">
+                        <path
+                            d="M230.33,141.06a24.34,24.34,0,0,0-18.61-4.77C230.5,117.33,240,98.48,240,80c0-26.47-21.29-48-47.46-48A47.58,47.58,0,0,0,156,48.75,47.58,47.58,0,0,0,119.46,32C93.29,32,72,53.53,72,80c0,11,3.24,21.69,10.06,33a31.87,31.87,0,0,0-14.75,8.4L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM119.46,48A31.15,31.15,0,0,1,148.6,67a8,8,0,0,0,14.8,0,31.15,31.15,0,0,1,29.14-19C209.59,48,224,62.65,224,80c0,19.51-15.79,41.58-45.66,63.9l-11.09,2.55A28,28,0,0,0,140,112H100.68C92.05,100.36,88,90.12,88,80,88,62.65,102.41,48,119.46,48ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9Z">
+                        </path>
+                    </svg>
+                    Make Adoption
+                </a>
+            </li>
+        </ul>
+    </div>
 
     {{-- Search --}}
     <label class="input text-white bg-[#0009] outline-none mb-10">
@@ -33,14 +58,12 @@
             <thead>
                 <tr class="text-white">
                     <th class="hidden md:table-cell">Id</th>
-                    <th>Name Pet</th>
                     <th>Photo</th>
+                    <th>Name Pet</th>
                     <th>Kind</th>
-                    <th class="hidden md:table-cell">Weight</th>
                     <th>Age</th>
                     <th class="hidden md:table-cell">Breed</th>
-                    <th class="hidden md:table-cell">Location</th>
-                    <th>Description</th>
+                    <th class="hidden md:table-cell">Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -48,20 +71,36 @@
                 @foreach ($pets as $pet)
                     <tr @if ($pet->id % 2 == 0) class="bg-[#0006]" @endif>
                         <th class="hidden md:table-cell">{{ $pet->id }}</th>
-                        <td>{{ $pet->name }}</td>
                         <td>
                             <div class="avatar">
                                 <div class="mask mask-squircle w-24">
-                                    <img src="{{ asset('images/' . $pet->image) }}" />
+                                    <img src="{{ asset('images/' . ($pet->photo ?? $pet->image ?? 'no-image.png')) }}" alt="{{ $pet->name }}" />
                                 </div>
                             </div>
                         </td>
-                        <td class="hidden md:table-cell">{{ $pet->kind }}</td>
-                        <td class="hidden md:table-cell">{{ $pet->weight }} Kg</td>
-                        <td>{{ $pet->age }} Years</td>
-                        <td class="hidden md:table-cell">{{ $pet->breed }}</td>
-                        <td class="hidden md:table-cell">{{ $pet->location }}</td>
-                        <td>{{ Str::limit($pet->description, 10) }}</td>
+                        <td>{{ $pet->name }}</td>
+                        <td>
+                            @if ($pet->kind == 'Dog')
+                                <div class="badge badge-outline badge-warning">Dog</div>
+                            @elseif ($pet->kind == 'Cat')
+                                <div class="badge badge-outline badge-info">Cat</div>
+                            @elseif ($pet->kind == 'Bird')
+                                <div class="badge badge-outline badge-success">Bird</div>
+                            @elseif ($pet->kind == 'Pig')
+                                <div class="badge badge-outline badge-error">Pig</div>
+                            @else
+                                <div class="badge badge-outline">{{ $pet->kind }}</div>
+                            @endif
+                        </td>
+                        <td>{{ $pet->age ?? 'N/A' }} Years</td>
+                        <td class="hidden md:table-cell">{{ $pet->breed ?? 'N/A' }}</td>
+                        <td class="hidden md:table-cell">
+                            @if ($pet->status == 0)
+                                <div class="badge badge-outline badge-success">Available</div>
+                            @else
+                                <div class="badge badge-outline badge-error">Adopted</div>
+                            @endif
+                        </td>
                         <td>
                             <a class="btn btn-outline btn-xs" href="{{ url('makeadoption/' . $pet->id) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor"
@@ -79,7 +118,7 @@
                     </tr>
                 @endforeach
                 <tr class="bg-[#0009]">
-                    <td colspan="7">{{ $pets->links('layouts.pagination') }}</td>
+                    <td colspan="8">{{ $pets->links('layouts.pagination') }}</td>
                 </tr>
             </tbody>
         </table>
@@ -153,10 +192,10 @@
                 const query = $(this).val()
 
                 $('.datalist').html(`<tr>
-                                <td colspan="7" class="text-center py-18">
-                                    <span class="loading loading-infinity loading-xl"></span>
-                                </td>
-                            </tr>`)
+                                        <td colspan="8" class="text-center py-18">
+                                            <span class="loading loading-infinity loading-xl"></span>
+                                        </td>
+                                    </tr>`)
                 if (query != '') {
                     search(query)
                 } else {
