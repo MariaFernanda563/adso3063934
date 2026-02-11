@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>API JS: Larapets</title>
+        <link rel="stylesheet" href="css/master.css" />
+    </head>
+    <body>
+        <!-- View: Login -->
+        <main id="login" class="hide">
+            <header>
+                <img src="img/title-login.png" alt="login">
+            </header>
+            <form action="">
+                <label for="email">Email:
+                    <input type="email" id="email" placeholder="example@example.com">
+                </label>
+                <label for="password">Password:
+                    <input type="password" id="password" placeholder="Your Secret">
+                </label>
+                <button>Login</button>
+            </form>
+        </main>
+
+<!-- View: Login -->
+        <main id="dashboard">
+            <header>
+                <img src="img/title-dashboard.png" alt="dashboard">
+            </header>
+            <nav>
+                <a href="" class="btn-add">
+                    <img src="img/btn-add.png" alt="add">
+                </a>
+                <a href="" class="btn-logout">
+                    <img src="img/btn-logout.png" alt="logout">
+                </a>
+            </nav>
+
+            <h2>Pet List</h2>
+            <section class="list">
+                <div class="row">
+                    <img src="img/pet-01.png" alt="pet01">
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+            </section>
+        </main>
+        
+        <script src="js/app.js" alt="dashboard"></script>
+    </body>
+</html>

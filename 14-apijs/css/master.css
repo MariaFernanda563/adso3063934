@@ -1,0 +1,172 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* body ------------------------*/
+body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-height: 100dvh;
+    /* main ------------------------*/
+    main {
+        background-color: #ac87a9;
+        height: 526px;
+        width: 246px;
+        overflow: auto;
+        position: relative;
+        &.hide {
+            display: none;
+        }
+        /* Login ------------------*/
+        &#login {
+            background: url(../img/bg-login.jpg) no-repeat center;
+            background-size: cover;
+            /* Form ------------------*/
+            form {
+                flex-direction: column;
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                bottom: 10rem;
+                padding: 0 0.6rem;
+            }
+            label {
+                display: flex;
+                flex-direction: column;
+                input {
+                    border: none;
+                    border-radius: 20px;
+                    color: #00aeff;
+                    font-family: "Poppins", sans-serif;
+                    height: 34px;
+                    outline: none;
+                    text-indent: 0.4rem;
+                    width: 220px;
+                    &::placeholder {
+                        color: #757575;
+                    }
+                }
+            }
+            button {
+                background-color: #00aeff;
+                border: 2px solid #00aeff;
+                border-radius: 20px;
+                font-family: poppins;
+                color: #fff;
+                width: 224px;
+                height: 36px;
+                transition: transform 0.4s ease-in;
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+        }
+        /* h2 */
+        h2 {
+            font-weight: 400;
+            margin-left: 0.6rem;
+        }
+
+        /* Dashboard ------------------*/
+        &#dashboard {
+            nav {
+                padding-top: 4rem;
+                display: flex;
+                justify-content: space-around;
+                a:link,
+                a:visited {
+                    background-color: #00aeff;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 20px;
+                    width: 100px;
+                    text-decoration: none;
+                    text-indent: -9999px;
+                    height: 36px;
+                    transition: 0.2s ease-in;
+                    &.btn-add {
+                        background-color: #288f00;
+                    }
+                    &.btn-logout {
+                        background-color: #8f0000;
+                    }
+                    &:hover {
+                        transform: scale(1.025);
+                    }
+                }
+            }
+            section.list {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                gap: 0.4rem;
+                align-items: center;
+                margin-bottom: 1rem;
+                div.row {
+                    &:nth-child(even){
+                        background-color: #3e0d0d;
+                    }
+                    background-color: #fff;
+                    border-radius: 5px;
+                    display: flex;
+                    gap: 0.4rem;
+                    padding: 0.2rem;
+                    height: 34px;
+                    width: 226px;
+                    div.data {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: start;
+                        justify-content: center;
+                        width: 200px;
+                        h3{
+                            font-size: 12px;
+                            font-weight: 500;
+                            margin: 0;
+                        }
+                        h4{
+                            font-size: 10px;
+                            font-weight: 400;
+                            margin: 0;
+                        }
+                    }
+                        nav.actions{
+                            padding-top: 0;
+                            display: flex;
+                            gap: 0.2rem;
+                            a:link, a:visited{
+                                height: 20px;
+                                width: 20px;
+                                &.btn-show{
+                                    background: url(../img/view-pet.png) no-repeat center;
+                                }
+                                &.btn-edit{
+                                    background: url(../img/edit-pet.png) no-repeat center;
+                                }
+                                &.btn-delete{
+                                    background: url(../img/delete-pet.png) no-repeat center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        header {
+            background-color: #00aeff;
+            border-radius: 5px 5px 0 0;
+            height: 50px;
+            position: fixed;
+            width: 246px;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+    }
+}
