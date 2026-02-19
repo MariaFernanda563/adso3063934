@@ -11,7 +11,11 @@ body {
     min-height: 100dvh;
     /* main ------------------------*/
     main {
-        background-color: #ac87a9;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        background: url(../img/bg-login.jpg) no-repeat center;
+        background-size: cover;
         height: 526px;
         width: 246px;
         overflow: auto;
@@ -19,6 +23,72 @@ body {
         &.hide {
             display: none;
         }
+        form {
+            flex-direction: column;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 4rem;
+            padding: 0 0.6rem;
+        }
+        label {
+            display: flex;
+            flex-direction: column;
+            input,
+            textarea {
+                border: none;
+                border-radius: 20px;
+                color: #00aeff;
+                font-family: "Poppins", sans-serif;
+                height: 15px;
+                outline: none;
+                text-indent: 0.4rem;
+                width: 220px;
+                &::placeholder {
+                    color: #757575;
+                }
+            }
+            textarea {
+                height: 80px;
+                text-indent: 0;
+            }
+        }
+        div.actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 200px;
+            button,
+            a:link,
+            a:visited {
+                background-color: #30a000;
+                border: none;
+                border-radius: 5px;
+                font-family: Poppins;
+                color: #fff;
+                width: 70px;
+                height: 38px;
+                transition: transform 0.4s ease-in;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+            a:link,
+            a:visited {
+                background-color: rgb(171, 0, 0);
+                text-decoration: none;
+                font-size: 0.9rem;
+                display: flex;
+                height: 38px;
+                width: 70px;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
         /* Login ------------------*/
         &#login {
             background: url(../img/bg-login.jpg) no-repeat center;
@@ -109,8 +179,11 @@ body {
                 align-items: center;
                 margin-bottom: 1rem;
                 div.row {
-                    &:nth-child(even){
-                        background-color: #3e0d0d;
+                    &:nth-child(even) {
+                        background-color: #0d3a3ec6;
+                    }
+                    img {
+                        width: 35px;
                     }
                     background-color: #fff;
                     border-radius: 5px;
@@ -121,52 +194,174 @@ body {
                     width: 226px;
                     div.data {
                         display: flex;
-                        flex-direction: column;
-                        align-items: start;
-                        justify-content: center;
-                        width: 200px;
-                        h3{
-                            font-size: 12px;
-                            font-weight: 500;
-                            margin: 0;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 190px;
+
+                        .info {
+                            flex: 1;
+
+                            h3 {
+                                font-size: 12px;
+                                font-weight: 500;
+                                margin: 0;
+                            }
+
+                            h4 {
+                                font-size: 10px;
+                                font-weight: 400;
+                                margin: 0;
+                            }
                         }
-                        h4{
-                            font-size: 10px;
-                            font-weight: 400;
-                            margin: 0;
+
+                        img {
+                            max-height: 50px;
+                            max-width: 50px;
+                            object-fit: cover;
+                            border-radius: 3px;
                         }
                     }
-                        nav.actions{
-                            padding-top: 0;
-                            display: flex;
-                            gap: 0.2rem;
-                            a:link, a:visited{
-                                height: 20px;
-                                width: 20px;
-                                &.btn-show{
-                                    background: url(../img/view-pet.png) no-repeat center;
-                                }
-                                &.btn-edit{
-                                    background: url(../img/edit-pet.png) no-repeat center;
-                                }
-                                &.btn-delete{
-                                    background: url(../img/delete-pet.png) no-repeat center;
+                    nav.actions {
+                        padding-top: 0;
+                        display: flex;
+                        gap: 0.2rem;
+                        a:link,
+                        a:visited {
+                            height: 20px;
+                            width: 20px;
+                            &.btn-show {
+                                background: url(../img/show.svg) no-repeat
+                                    center;
+                            }
+                            &.btn-edit {
+                                background: url(../img/edit.svg) no-repeat
+                                    center;
+                            }
+                            &.btn-delete {
+                                background: url(../img/delete.svg) no-repeat
+                                    center;
                             }
                         }
                     }
                 }
             }
         }
+        &#dashboard {
+            nav {
+                padding-top: 4rem;
+                display: flex;
+                justify-content: space-around;
+                a:link,
+                a:visited {
+                    background-color: #00aeff;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 20px;
+                    width: 100px;
+                    text-decoration: none;
+                    text-indent: -9999px;
+                    height: 36px;
+                    transition: 0.2s ease-in;
+                    &.btn-add {
+                        background-color: #288f00;
+                    }
+                    &.btn-logout {
+                        background-color: #8f0000;
+                    }
+                    &:hover {
+                        transform: scale(1.025);
+                    }
+                }
+            }
+        }
 
+        &#show {
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            padding-top: 56px; /* espacio para el header */
+
+            /* sección como cuadro centrado */
+            section {
+                background: rgba(255, 255, 255, 0.95);
+                width: 220px;
+                border-radius: 12px;
+                padding: 12px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                overflow: hidden;
+                display: block;
+                margin: 1rem auto 0;
+            }
+
+            .imagen {
+                display: block;
+                margin: 0 auto 1rem;
+                width: 150px;
+                height: 150px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .imagen img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            section table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 0;
+            }
+
+            section th,
+            section td {
+                padding: 6px 8px;
+                font-size: 13px;
+                vertical-align: middle;
+            }
+
+            section th {
+                font-weight: 600;
+                color: #333;
+                width: 45%;
+                text-align: left;
+                padding-left: 10px;
+            }
+
+            section td {
+                text-align: center;
+                color: #555;
+            }
+        }
+
+        /* header ---------------------------- */
         header {
             background-color: #00aeff;
             border-radius: 5px 5px 0 0;
             height: 50px;
-            position: fixed;
-            width: 246px;
+            position: absolute; /* colocado respecto al main (main tiene position: relative) */
+            top: 0;
+            left: 0;
+            width: 100%;
             justify-content: center;
             display: flex;
             align-items: center;
+            a:link,
+            a:visited {
+                display: flex;
+                position: absolute;
+                left: 0.4rem;
+                transition: transform 0.2s ease-in;
+            }
+            a:hover {
+                transform: translateX(-4px);
+            }
         }
     }
 }

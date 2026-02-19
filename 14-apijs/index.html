@@ -1,59 +1,193 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>API JS: Larapets</title>
-        <link rel="stylesheet" href="css/master.css" />
-    </head>
-    <body>
-        <!-- View: Login -->
-        <main id="login" class="hide">
-            <header>
-                <img src="img/title-login.png" alt="login">
-            </header>
-            <form action="">
-                <label for="email">Email:
-                    <input type="email" id="email" placeholder="example@example.com">
-                </label>
-                <label for="password">Password:
-                    <input type="password" id="password" placeholder="Your Secret">
-                </label>
-                <button>Login</button>
-            </form>
-        </main>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API JS: Larapets</title>
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.min.css">
+</head>
+<body>
+    <!-- View: Login -->
+    <main id="login" >
+        <header>
+            <img src="img/title-login.svg" alt="">
+        </header>
+        <form id="loginForm">
+            <label for="email">
+                Email:
+                <input type="email" id="email" name="email" placeholder="example@gmail.com">
+            </label>
+            <label for="password">
+                Password:
+                <input type="password" id="password" name="password" placeholder="your secret">
+            </label>
+            <button class="btnLogin">login</button>
+        </form>
+    </main>
 
-<!-- View: Login -->
-        <main id="dashboard">
-            <header>
-                <img src="img/title-dashboard.png" alt="dashboard">
-            </header>
-            <nav>
-                <a href="" class="btn-add">
-                    <img src="img/btn-add.png" alt="add">
-                </a>
-                <a href="" class="btn-logout">
-                    <img src="img/btn-logout.png" alt="logout">
-                </a>
-            </nav>
-
-            <h2>Pet List</h2>
-            <section class="list">
-                <div class="row">
-                    <img src="img/pet-01.png" alt="pet01">
-                    <div class="data">
-                        <h3>Emilio</h3>
-                        <h4>Cat: Criole</h4>
-                    </div>
-                    <nav class="actions">
-                        <a href="" class="btn-show"></a>
-                        <a href="" class="btn-edit"></a>
-                        <a href="" class="btn-delete"></a>
-                    </nav>
+    <!-- view Dashboard -->
+    <main id="dashboard" >
+        <header>
+            <img src="img/title-dashboard.svg" alt="Dashboard">
+        </header>
+        <nav>
+            <a href="javascript:;" class="btnAdd">
+                <img src="img/add.svg" alt="Add">
+            </a>
+            <a href="javascript:;" class="btnLogout">
+                <img src="img/logout.svg" alt="Logout">
+            </a>
+        </nav>
+        <h2>Pet List</h2>
+        <section class="list" id="petList">
+            <!-- <div class="row">
+                <img src="img/pet.png" alt="Pet01">
+                <div class="data">
+                    <h3>Firulais</h3>
+                    <h4>Dog: French Bulldog</h4>
                 </div>
-            </section>
-        </main>
+                <nav class="actions">
+                    <a href="javascript:;" class="btn-show"></a>
+                    <a href="javascript:;" class="btn-edit"></a>
+                    <a href="javascript:;" class="btn-delete"></a>
+                </nav>
+            </div> -->
+        </section>
         
-        <script src="js/app.js" alt="dashboard"></script>
-    </body>
+    </main>
+
+    <!-- Add -->
+    <main id="add" >
+        <header>
+            <a href="javascript:;" class="btnBack">
+                <img src="img/back.svg" alt="Back">
+            </a>
+            <img src="img/title-add.svg" alt="Add">
+        </header>
+        <form action="">
+            <label for="name">
+                Name:
+                <input type="text" name="name" placeholder="josefina">
+            </label>
+            <label for="kind">
+                Kind:
+                <input type="text" name="kind" placeholder="Dog">
+            </label>
+            <label for="weight">
+                Weight:
+                <input type="text" name="weight" placeholder="12">
+            </label>
+            <label for="age">
+                age:
+                <input type="number" name="age" placeholder="5">
+            </label>
+            <label for="breed">
+                breed:
+                <input type="text" name="breed" placeholder="Bulldog">
+            </label>
+            <label for="location">
+                location:
+                <input type="text" name="location" placeholder="Manizales">
+            </label>
+            <label for="description">
+                Description:
+                <textarea name="description" placeholder="Freed only chicken parts"></textarea>
+            </label>
+            <div class="actions">
+                <button type="button">Add</button>
+                <a href="javascript:;" class="btnCancel">Cancel</a>
+            </div>
+        </form>
+    </main>
+
+
+    <!-- Edit -->
+    <main id="edit" >
+        <header>
+            <a href="javascript:;" class="btnBack">
+                <img src="img/back.svg" alt="Back">
+            </a>
+            <img src="img/title-edit.svg" alt="Edit">
+        </header>
+        <form action="">
+            <label for="name">
+                Name: 
+                <input type="text" name="name" placeholder="josefina" value="josefina">
+            </label>
+            <label for="kind">
+                Kind:
+                <input type="text" name="kind" placeholder="Dog" value="Dog">
+            </label>
+            <label for="weight">
+                Weight:
+                <input type="text" name="weight" placeholder="12" value="12">
+            </label>
+            <label for="age">
+                age:
+                <input type="number" name="age" placeholder="5" value="5">
+            </label>
+            <label for="breed">
+                breed:
+                <input type="text" name="breed" placeholder="Bulldog" value="Bulldog">
+            </label>
+            <label for="location">
+                location:
+                <input type="text" name="location" placeholder="Manizales" value="Manizales">
+            </label>
+            <label for="description">
+                Description:
+                <textarea name="description" placeholder="Freed only chicken parts">Freed only chicken parts</textarea>
+            </label>
+            <div class="actions">
+                <button type="button">Edit</button>
+                <a href="javascript:;" class="btnCancel">Cancel</a>
+            </div>
+        </form>
+    </main>
+
+
+    <!-- Show -->
+    <main id="show">
+        <header>
+            <a href="javascript:;" class="btnBack">
+                <img src="img/back.svg" alt="Back">
+            </a>
+            <img src="img/title-show.svg" alt="Show">
+        </header>
+
+        <div class="imagen">
+            <img src="img/pet.jpg" alt="cat">
+        </div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>Emilio</td>
+            </tr>
+            <tr>
+                <th>Kind</th>
+                <td>Cat</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>5kg</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>7 years</td>
+            </tr>
+            <tr>
+                <th>Breed</th>
+                <td>Siamese</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>Manizales</td>
+            </tr>
+        </table>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.all.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
 </html>

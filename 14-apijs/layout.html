@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>API JS: Larapets</title>
+        <link rel="stylesheet" href="css/master.css" />
+    </head>
+    <body>
+        <main id="login">
+            <header>
+                <img src="img/title-login.png" alt="login" />
+            </header>
+            <form action="">
+                <label for="email"
+                    >Email:
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="example@example.com"
+                    />
+                </label>
+                <label for="password"
+                    >Password:
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Your Secret"
+                    />
+                </label>
+                <button>Login</button>
+            </form>
+        </main>
+        <main id="dashboard">
+            <header>
+                <img src="img/title-dashboard.png" alt="dashboard" />
+            </header>
+            <nav>
+                <a href="" class="btn-add">
+                    <img src="img/btn-add.png" alt="add" />
+                </a>
+                <a href="" class="btn-logout">
+                    <img src="img/btn-logout.png" alt="logout" />
+                </a>
+            </nav>
+
+            <h2>Pet List</h2>
+            <section class="list">
+                <div class="row">
+                    <img src="img/pet.jpg" alt="pet01" />
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+                <div class="row">
+                    <img src="img/pet.jpg" alt="pet01" />
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+                <div class="row">
+                    <img src="img/pet.jpg" alt="pet01" />
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+                <div class="row">
+                    <img src="img/pet.jpg" alt="pet01" />
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+                <div class="row">
+                    <img src="img/pet.jpg" alt="pet01" />
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+                <div class="row">
+                    <img src="img/pet.jpg" alt="pet01" />
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+                <div class="row">
+                    <img src="img/pet.jpg" alt="pet01" />
+                    <div class="data">
+                        <h3>Emilio</h3>
+                        <h4>Cat: Criole</h4>
+                    </div>
+                    <nav class="actions">
+                        <a href="" class="btn-show"></a>
+                        <a href="" class="btn-edit"></a>
+                        <a href="" class="btn-delete"></a>
+                    </nav>
+                </div>
+            </section>
+        </main>
+        <main id="add">
+            <header>
+                <a href="">
+                    <img src="img/back.svg" alt="back" />
+                </a>
+                <img src="img/title-ad.svg" alt="add" />
+            </header>
+            <form action="">
+                <label for="name"
+                    >Nombre:
+                    <input type="text" id="name" placeholder="Name Pet" />
+                </label>
+                <label for="kind"
+                    >Kind:
+                    <input type="text" id="kind" placeholder="Dog, Cat" />
+                </label>
+                <label for="number"
+                    >Weigth:
+                    <input type="text" id="number" placeholder="12" />
+                </label>
+                <label for="breed"
+                    >Breed:
+                    <input
+                        type="text"
+                        id="breed"
+                        placeholder="Bulldog, Persian"
+                    />
+                </label>
+                <label for="location"
+                    >Location:
+                    <input type="text" id="location" placeholder="Mzl, Pr" />
+                </label>
+                <label for="description"
+                    >Description:
+                    <textarea
+                        name="description"
+                        placeholder="Freed only chicken parts"
+                    ></textarea>
+                </label>
+                <div class="actions">
+                    <button>Add</button>
+                    <a href="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </main>
+        <main id="edit">
+            <header>
+                <a href="">
+                    <img src="img/back.svg" alt="back" />
+                </a>
+                <img src="img/edit.svg" alt="add" />
+            </header>
+            <form action="">
+                <label for="name"
+                    >Nombre:
+                    <input type="text" id="name" placeholder="Name Pet" />
+                </label>
+                <label for="kind"
+                    >Kind:
+                    <input type="text" id="kind" placeholder="Dog, Cat" />
+                </label>
+                <label for="number"
+                    >Weigth:
+                    <input type="text" id="number" placeholder="12" />
+                </label>
+                <label for="breed"
+                    >Breed:
+                    <input
+                        type="text"
+                        id="breed"
+                        placeholder="Bulldog, Persian"
+                    />
+                </label>
+                <label for="location"
+                    >Location:
+                    <input type="text" id="location" placeholder="Mzl, Pr" />
+                </label>
+                <label for="description"
+                    >Description:
+                    <textarea
+                        name="description"
+                        placeholder="Freed only chicken parts"
+                    ></textarea>
+                </label>
+                <div class="actions">
+                    <button>Edit</button>
+                    <a href="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </main>
+        <main id="show">
+            <header>
+                <a href="">
+                    <img src="img/back.svg" alt="back" />
+                </a>
+                <img src="img/show.svg" alt="add" />
+            </header>
+            <section>
+                <div class="pet">
+                    <img src="img/pet.jpg" alt="pet" />
+                </div>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <td>Emilio</td>
+                    </tr>
+                    <tr>
+                        <th>Kind</th>
+                        <td>Emilio</td>
+                    </tr>
+                    <tr>
+                        <th>Weigth</th>
+                        <td>Emilio</td>
+                    </tr>
+                    <tr>
+                        <th>Breed</th>
+                        <td>Emilio</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>Emilio</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>Emilio</td>
+                    </tr>
+                </table>
+            </section>
+        </main>
+
+        <script src="js/app.js" alt=""></script>
+    </body>
+</html>
