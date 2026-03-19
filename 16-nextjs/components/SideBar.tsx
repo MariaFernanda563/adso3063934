@@ -12,8 +12,10 @@ import {
 
 export default function SideBar({
     currentPath = "/dashboard",
+    children
 }: {
     currentPath: string;
+    children: React.ReactNode;
 }) {
     const navigation = [
         { name: "Dashboard", href: "/dashboard", icon: SquaresFourIcon },
@@ -42,7 +44,7 @@ export default function SideBar({
                     </div>
                 </nav>
                 {/* Page content here */}
-                <div className="p-4">Page Content</div>
+                <div className="p-4">{children}</div>
             </div>
 
             <div className="drawer-side is-drawer-close:overflow-visible">
