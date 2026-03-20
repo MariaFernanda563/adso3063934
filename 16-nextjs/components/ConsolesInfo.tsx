@@ -8,29 +8,27 @@ const prisma = new PrismaClient({
     }),
 });
 
-export default async function GamesInfo() {
-    const games = await prisma.game.findMany({
-        include: { console: true },
-    });
+export default async function ConsolesInfo() {
+    const consoles = await prisma.console.findMany();
 
     return (
         <div>
-            <h1>Games</h1>
+            <h1>Consoles</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-                {games.map((game) => (
-                    <div key={game.id} className="card card-compact bg-black shadow-sm h-full">
+                {consoles.map((console) => (
+                    <div key={console.id} className="card card-compact bg-black shadow-sm h-full">
                         <figure className="relative w-full h-48">
                             <Image
-                                        src={`/img/${game.cover}`}
-                                        alt={game.cover}
+                                        src={`/img/${console.image}`}
+                                        alt={console.name}
                                         fill
                                         className="object-cover"
                                     />
                         </figure>
                         <div className="card-body">
-                            <h2 className="card-title">{game.title}</h2>
-                            <p>Console: {game.console.name}</p>
+                            <h2 className="card-title">{console.name}</h2>
+                            <p>Console: {console.description}</p>
                             <div className="card-actions justify-end">
                                 <button className="btn btn-primary">Watch</button>
                             </div>

@@ -20,7 +20,7 @@ export default function SideBar({
     const navigation = [
         { name: "Dashboard", href: "/dashboard", icon: SquaresFourIcon },
         { name: "Games", href: "/games", icon: JoystickIcon },
-        { name: "Console", href: "/add", icon: ComputerTowerIcon },
+        { name: "Consoles", href: "/consoles", icon: ComputerTowerIcon },
         { name: "Settings", href: "/settings", icon: GearIcon },
     ];
     return (
