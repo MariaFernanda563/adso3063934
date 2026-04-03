@@ -25,9 +25,20 @@ export default async function GamesPage({
         include: { console: true },
     });
 
+    async function deleteGame(formData: FormData) {
+        "use server";
+
+        const id = Number(formData.get("id"));
+
+        await prisma.game.delete({
+            where: { id },
+        });
+    }
+
     return (
         <SideBar currentPath="/games">
-            <GamesInfo games={games} />
+            <GamesInfo games={games} deleteGame={deleteGame} />
         </SideBar>
     );
 }
+

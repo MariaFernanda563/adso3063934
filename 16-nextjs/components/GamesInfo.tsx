@@ -14,11 +14,12 @@ type GameWithConsole = {
 
 type GamesInfoProps = {
     games: GameWithConsole[];
+    deleteGame: (formData: FormData) => void;
 };
 
-export default function GamesInfo({ games }: GamesInfoProps) {
+export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
     const [search, setSearch] = useState("");
-    const router = useRouter(); // ✅ AQUÍ
+    const router = useRouter();
 
     const addGame = () => {
         router.push("/games/add");
@@ -61,7 +62,10 @@ export default function GamesInfo({ games }: GamesInfoProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
                 {filteredGames.map((game) => (
-                    <div key={game.id} className="card card-compact bg-black shadow-sm h-full">
+                    <div
+                        key={game.id}
+                        className="card card-compact bg-black shadow-sm h-full"
+                    >
                         <figure className="relative w-full h-48">
                             <Image
                                 src={`/img/${game.cover}`}
@@ -73,6 +77,34 @@ export default function GamesInfo({ games }: GamesInfoProps) {
                         <div className="card-body">
                             <h2 className="card-title">{game.title}</h2>
                             <p>Console: {game.console.name}</p>
+                            <div className="flex gap-2 mt-4 justify-end">
+                                <a
+                                    href={`/games/${game.id}`}
+                                    className="btn btn-soft btn-primary w-20"
+                                >
+                                    View
+                                </a>
+                                <a
+                                    href={`/games/${game.id}/edit`}
+                                    className="btn btn-soft btn-warning w-20"
+                                >
+                                    Edit
+                                </a>
+                                <form action={deleteGame}>
+    <input type="hidden" name="id" value={game.id} />
+
+    <button
+        className="btn btn-soft btn-error w-20"
+        onClick={(e) => {
+            if (!confirm("¿Estás seguro de eliminar este juego?")) {
+                e.preventDefault();
+            }
+        }}
+    >
+        Delete
+    </button>
+</form>
+                            </div>
                         </div>
                     </div>
                 ))}
