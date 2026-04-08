@@ -14,7 +14,7 @@ type GameWithConsole = {
 
 type GamesInfoProps = {
     games: GameWithConsole[];
-    deleteGame: (formData: FormData) => void;
+    deleteGame: (formData: FormData) => Promise<void>;
 };
 
 export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
@@ -91,19 +91,69 @@ export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
                                     Edit
                                 </a>
                                 <form action={deleteGame}>
-    <input type="hidden" name="id" value={game.id} />
+                                    <input
+                                        type="hidden"
+                                        name="id"
+                                        value={game.id}
+                                    />
 
-    <button
-        className="btn btn-soft btn-error w-20"
-        onClick={(e) => {
-            if (!confirm("¿Estás seguro de eliminar este juego?")) {
-                e.preventDefault();
-            }
-        }}
-    >
-        Delete
-    </button>
-</form>
+                                    <>
+                                        <button
+                                            className="btn btn-soft btn-error w-20"
+                                            onClick={() =>
+                                                (
+                                                    document.getElementById(
+                                                        `delete_modal_${game.id}`,
+                                                    ) as HTMLDialogElement
+                                                ).showModal()
+                                            }
+                                        >
+                                            Delete
+                                        </button>
+
+                                        <dialog
+                                            id={`delete_modal_${game.id}`}
+                                            className="modal modal-bottom sm:modal-middle"
+                                        >
+                                            <div className="modal-box bg-black">
+                                                <h3 className="font-bold text-lg">
+                                                    Alert!
+                                                </h3>
+
+                                                <p className="py-4">
+                                                    Are you sure you want to
+                                                    delete this game?
+                                                </p>
+
+                                                <div className="modal-action">
+                                                    <form
+                                                        action={deleteGame}
+                                                        className="flex gap-2"
+                                                    >
+                                                        <input
+                                                            type="hidden"
+                                                            name="id"
+                                                            value={game.id}
+                                                        />
+
+                                                        <button
+                                                            type="submit"
+                                                            className="btn btn-soft btn-error"
+                                                        >
+                                                            Confirm
+                                                        </button>
+                                                    </form>
+
+                                                    <form method="dialog">
+                                                        <button className="btn">
+                                                            Cancel
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </dialog>
+                                    </>
+                                </form>
                             </div>
                         </div>
                     </div>

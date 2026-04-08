@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Console" ALTER COLUMN "releaseDate" SET DATA TYPE TIMESTAMP(0);
