@@ -3,12 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function AddGameForm() {
-    const [preview, setPreview] = useState("/img/no-cover.png");
+type Props = {
+    initialImage?: string;
+};
+
+export default function AddGameForm({ initialImage }: Props) {
+    const [preview, setPreview] = useState(
+        initialImage ? `/img/${initialImage}` : "/img/no-cover.png"
+    );
 
     return (
         <div className="flex flex-col items-center gap-3">
-            <div className="w-48 h-48 relative border rounded-lg bg-black">
+            <div className="w-48 h-48 relative border rounded-lg bg-black overflow-hidden">
                 <Image
                     src={preview}
                     alt="preview"

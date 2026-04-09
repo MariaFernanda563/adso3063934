@@ -17,7 +17,10 @@ type ConsolesInfoProps = {
     deleteConsole: (formData: FormData) => Promise<void>;
 };
 
-export default function ConsolesInfo({ consoles, deleteConsole }: ConsolesInfoProps) {
+export default function ConsolesInfo({
+    consoles,
+    deleteConsole,
+}: ConsolesInfoProps) {
     const router = useRouter();
 
     return (
@@ -101,17 +104,25 @@ export default function ConsolesInfo({ consoles, deleteConsole }: ConsolesInfoPr
                                             Alert!
                                         </h3>
                                         <p className="py-4">
-                                            Are you sure you want to delete this console?
+                                            Are you sure you want to delete this
+                                            console?
                                         </p>
                                         <div className="modal-action">
                                             <form method="dialog">
-                                                <input type="hidden" name="id" value={consoleItem.id} />
-                                                <button formAction={deleteConsole} className="btn btn-soft btn-error">
+                                                <input
+                                                    type="hidden"
+                                                    name="id"
+                                                    value={consoleItem.id}
+                                                />
+                                                <button
+                                                    formAction={deleteConsole}
+                                                    className="btn btn-soft btn-error"
+                                                >
                                                     Confirm
                                                 </button>
-                                                <a href="/consoles" className="btn">
+                                                <button className="btn">
                                                     Cancel
-                                                </a>
+                                                </button>
                                             </form>
                                         </div>
                                     </div>

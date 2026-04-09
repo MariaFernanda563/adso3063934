@@ -28,7 +28,12 @@ export default async function GamesPage({
     async function deleteGame(formData: FormData) {
         "use server";
 
-        const id = Number(formData.get("id"));
+        const idValue = formData.get("id");
+        const id = Number(idValue);
+
+        if (!idValue || Number.isNaN(id) || id <= 0) {
+            throw new Error("Invalid game id for delete action.");
+        }
 
         await prisma.game.delete({
             where: { id },

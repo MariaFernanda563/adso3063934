@@ -17,8 +17,11 @@ type GamesInfoProps = {
     deleteGame: (formData: FormData) => Promise<void>;
 };
 
+const ITEMS_PER_PAGE = 9;
+
 export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
     const [search, setSearch] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
     const router = useRouter();
 
     const addGame = () => {
@@ -37,6 +40,17 @@ export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
         });
     }, [games, search]);
 
+    const totalPages = Math.ceil(filteredGames.length / ITEMS_PER_PAGE);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedGames = filteredGames.slice(startIndex, endIndex);
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+
     return (
         <div>
             <h1>Games</h1>
@@ -44,7 +58,10 @@ export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
             <div className="mb-6">
                 <input
                     value={search}
-                    onChange={(event) => setSearch(event.target.value)}
+                    onChange={(event) => {
+                        setSearch(event.target.value);
+                        setCurrentPage(1);
+                    }}
                     placeholder="Buscar juego o consola..."
                     className="input input-bordered w-full max-w-lg"
                 />
@@ -61,7 +78,7 @@ export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-                {filteredGames.map((game) => (
+                {paginatedGames.map((game) => (
                     <div
                         key={game.id}
                         className="card card-compact bg-black shadow-sm h-full"
@@ -90,75 +107,106 @@ export default function GamesInfo({ games, deleteGame }: GamesInfoProps) {
                                 >
                                     Edit
                                 </a>
-                                <form action={deleteGame}>
-                                    <input
-                                        type="hidden"
-                                        name="id"
-                                        value={game.id}
-                                    />
+                                <div>
+                                    <button
+                                        type="button"
+                                        className="btn btn-soft btn-error w-20"
+                                        onClick={() =>
+                                            (
+                                                document.getElementById(
+                                                    `delete_modal_${game.id}`,
+                                                ) as HTMLDialogElement
+                                            ).showModal()
+                                        }
+                                    >
+                                        Delete
+                                    </button>
 
-                                    <>
-                                        <button
-                                            className="btn btn-soft btn-error w-20"
-                                            onClick={() =>
-                                                (
-                                                    document.getElementById(
-                                                        `delete_modal_${game.id}`,
-                                                    ) as HTMLDialogElement
-                                                ).showModal()
-                                            }
-                                        >
-                                            Delete
-                                        </button>
+                                    <dialog
+                                        id={`delete_modal_${game.id}`}
+                                        className="modal modal-bottom sm:modal-middle"
+                                    >
+                                        <div className="modal-box bg-black">
+                                            <h3 className="font-bold text-lg">
+                                                Alert!
+                                            </h3>
 
-                                        <dialog
-                                            id={`delete_modal_${game.id}`}
-                                            className="modal modal-bottom sm:modal-middle"
-                                        >
-                                            <div className="modal-box bg-black">
-                                                <h3 className="font-bold text-lg">
-                                                    Alert!
-                                                </h3>
+                                            <p className="py-4">
+                                                Are you sure you want to
+                                                delete this game?
+                                            </p>
 
-                                                <p className="py-4">
-                                                    Are you sure you want to
-                                                    delete this game?
-                                                </p>
+                                            <div className="modal-action">
+                                                <form
+                                                    action={deleteGame}
+                                                    className="flex gap-2"
+                                                >
+                                                    <input
+                                                        type="hidden"
+                                                        name="id"
+                                                        value={String(game.id)}
+                                                    />
 
-                                                <div className="modal-action">
-                                                    <form
-                                                        action={deleteGame}
-                                                        className="flex gap-2"
+                                                    <button
+                                                        type="submit"
+                                                        className="btn btn-soft btn-error"
                                                     >
-                                                        <input
-                                                            type="hidden"
-                                                            name="id"
-                                                            value={game.id}
-                                                        />
+                                                        Confirm
+                                                    </button>
+                                                </form>
 
-                                                        <button
-                                                            type="submit"
-                                                            className="btn btn-soft btn-error"
-                                                        >
-                                                            Confirm
-                                                        </button>
-                                                    </form>
-
-                                                    <form method="dialog">
-                                                        <button className="btn">
-                                                            Cancel
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                <form method="dialog">
+                                                    <button className="btn">
+                                                        Cancel
+                                                    </button>
+                                                </form>
                                             </div>
-                                        </dialog>
-                                    </>
-                                </form>
+                                        </div>
+                                    </dialog>
+                                </div>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
+
+            {totalPages > 1 && (
+                <div className="flex justify-center mt-8 gap-2">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="btn btn-sm btn-outline"
+                    >
+                        Anterior
+                    </button>
+
+                    <div className="flex gap-1 items-center">
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                            (page) => (
+                                <button
+                                    key={page}
+                                    onClick={() => handlePageChange(page)}
+                                    className={`btn btn-sm ${
+                                        currentPage === page
+                                            ? "btn-active"
+                                            : "btn-outline"
+                                    }`}
+                                >
+                                    {page}
+                                </button>
+                            ),
+                        )}
+                    </div>
+
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="btn btn-sm btn-outline"
+                    >
+                        Siguiente
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
