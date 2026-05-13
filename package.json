@@ -1,0 +1,29 @@
+{
+  "name": "adso3063934",
+  "version": "1.0.0",
+  "description": "---\r ## URL Reources\r - [Drive Documentation](https://drive.google.com/drive/folders/1cUEOsM44rpspMfyWvY_YlnXlIm9uffej?usp=share_link)\r - [Repositories List](https://docs.google.com/spreadsheets/d/1M3B-qwrJN2wbeZmIBoA3r0hnP8yy4CKf2euV1oF61os/edit?usp=sharing)\r - [Vercel Site](https://github.com/MariaFernanda563/adso3063934)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariaFernanda563/adso3063934.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MariaFernanda563/adso3063934/issues"
+  },
+  "homepage": "https://github.com/MariaFernanda563/adso3063934#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1"
+  }
+}
